@@ -1,1 +1,1 @@
-https://manbehindatree.github.io/Strange-Place/
+kwwsv://pdqehklqgdwuhh.jlwkxe.lr/Vwudqjh-Sodfh/
