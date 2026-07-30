@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>???</title>
+
+<style>
+body {
+    margin: 0;
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#realSite {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.center-image {
+    max-width: 80vw;
+    max-height: 80vh;
+    cursor: pointer;
+}
+
+#text {
+    color: white;
+    margin-top: 20px;
+    font-size: 24px;
+    text-align: center;
+}
+
+
+/* NOTHING SITE */
+#nothingPage {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: black;
+    cursor: pointer;
+    z-index: 9999;
+}
+
+#nothingText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 24px;
+    text-align: center;
+}
+
+</style>
+</head>
+
+<body>
+
+
+<div id="nothingPage">
+    <span id="nothingText"></span>
+</div>
+
+
+<div id="realSite" onclick="backgroundClick(event)">
+
+    <img src="Tree.png" class="center-image" onclick="imageClick(event)">
+
+
+    <audio id="music" loop>
+        <source src="music.ogg" type="audio/ogg">
+    </audio>
+
+
+    <audio id="sound">
+        <source src="sound.mp3" type="audio/mpeg">
+    </audio>
+
+
+    <div id="text"></div>
+
+</div>
+
+
+
+<script>
+
+
+// RANDOM CHANCE
+
+if (Math.random() < 0.1) {
+    document.getElementById("realSite").style.display = "flex";
+} else {
+    document.getElementById("nothingPage").style.display = "flex";
+}
+
+
+let nothingClicks = 0;
+
+let nothingMessages = [
+    "...",
+    "Hello.",
+    "Were you expecting someone?",
+    "Well, there is only you.",
+    "And me.",
+    "...",
+    "Try again.",
+    "Why did you click again?",
+    "..."
+];
+
+
+document.getElementById("nothingPage").onclick = function() {
+
+    if (nothingClicks < nothingMessages.length) {
+
+        document.getElementById("nothingText").innerHTML =
+        nothingMessages[nothingClicks];
+
+        nothingClicks++;
+
+    }
+
+};
+
+
+// REAL SITE (your original code)
+
+let imageClicks = 0;
+let musicStarted = false;
+
+
+function startMusic() {
+
+    if (!musicStarted) {
+
+        let music = document.getElementById("music");
+        music.play();
+
+        musicStarted = true;
+
+    }
+
+}
+
+
+
+function imageClick(event) {
+
+    event.stopPropagation();
+
+    startMusic();
+
+    imageClicks++;
+
+
+    if (imageClicks === 1) {
+
+        document.getElementById("text").innerHTML =
+        "Well, there is a man here.";
+
+    }
+
+
+    else if (imageClicks === 2) {
+
+        document.getElementById("text").innerHTML =
+        "He offers you something.";
+
+    }
+
+
+    else if (imageClicks === 3) {
+
+        document.getElementById("text").innerHTML =
+        "You got an Egg.";
+
+        let sound = document.getElementById("sound");
+
+        sound.currentTime = 0;
+        sound.play();
+
+    }
+
+}
+
+
+
+function backgroundClick(event) {
+
+    if (event.target.tagName !== "IMG") {
+
+        startMusic();
+
+        document.getElementById("text").innerHTML =
+        "He is behind the tree.";
+
+        imageClicks = 0;
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
